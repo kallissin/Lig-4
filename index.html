@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&family=Sigmar+One&display=swap" rel="stylesheet">
+   
+
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>Lig-4</title>
@@ -15,7 +18,10 @@
     <div class="start__screen">
         <div class="container">
             <h1 class="start__title">Lig-4</h1>
-            <input class="start__input" id="name" type="text" value="" placeholder="Digite seu nome.">
+            <div id="div_start__input">
+                <input class="start__input" id="name" type="text" value="" placeholder="Player 1 - Digite seu nome">
+                <input class="start__input" id="name_2" type="text" value="" placeholder="Player 2 - Digite seu nome">
+            </div>
             <button id="start" class="start__button">Jogar</button>
         </div>
     </div>
@@ -30,8 +36,16 @@
         </div>
         <div class="player__screen">
             <div id="jogador" class="player__1"></div>
-            <div class="player__2"><h1>Adversário</h1></div>
+            <div class="player__2"><h1></h1></div>
         </div>
+
+        <div class="modal_container">
+            <div class="modal_final">
+                <h2 id="h2_resultado">Você ganhou!!</h2>
+                <button id="botao_reset">JOGAR NOVAMENTE</button>
+            </div>
+        </div>
+
     </main>
 
     <script src="assets/js/script.js"></script>
