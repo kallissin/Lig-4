@@ -1,13 +1,11 @@
 let start__button = document.getElementById('start')
 
-// BOTÃO DE INICIAR O JOGO
 start__button.addEventListener('click', function () {
     let modal = document.getElementsByClassName('start__screen')
     getName()
     modal[0].style.display = "none"
-})
+}) // BOTÃO DE INICIAR O JOGO
 
-// FUNÇÃO DE COLETAR NOME NA TELA INICIAL
 function getName() {
     let input = document.getElementById('name')
     let name = input.value
@@ -18,9 +16,9 @@ function getName() {
     let nameText = document.createElement('h1')
     nameText.innerText = name
     player.appendChild(nameText)
-}
+} // FUNÇÃO DE COLETAR NOME NA TELA INICIAL
 
-// FUNÇÃO DE CRIAR TABULEIRO DE JOGO
+
 function gameStart() {
     let mainscreen = document.getElementById('table')
 
@@ -40,11 +38,9 @@ function gameStart() {
             colunaAtual.appendChild(celula)
         }
     }
-}
+} // FUNÇÃO DE CRIAR TABULEIRO DE JOGO
 
 gameStart()
-
-// Pegar as colunas e dar eventos respectivos
 let lastplay = 0
 let colunas = document.querySelectorAll("div.table__column")
 let escolha = true
@@ -59,8 +55,9 @@ for (let i = 0; i < colunas.length; i++) {
                     disco.classList = "red"
                     cell.appendChild(disco)
                     lastplay = cell
-                    if (winCheck(lastplay) === true) {
-                        console.log("Vermelho venceu.")
+                    if (winCheck(lastplay)) {
+                        console.log("Vermelho venceu.") // remover console.log
+                        // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 1) ENTRA AQUI
                     }
                     escolha = false
                     break
@@ -69,7 +66,8 @@ for (let i = 0; i < colunas.length; i++) {
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay) === true) {
-                        console.log("Preto venceu.")
+                        console.log("Preto venceu.") // remover console.log
+                        // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
                     }
                     escolha = true
                     break
@@ -80,7 +78,7 @@ for (let i = 0; i < colunas.length; i++) {
 }
 
 
-function winCheckVertical(cell) {
+function winCheckUp(cell) {
     let id = cell.id
     let column = Number(id.charAt(0))
     let place = Number(id.charAt(2))
@@ -102,79 +100,100 @@ function winCheckVertical(cell) {
         return true
     }
     return false
-}
-function winCheckRight(cell) {
+} // FUNÇÃO QUE CHECA EM CIMA
+function winCheckSides(cell) {
     let id = cell.id
     let column = Number(id.charAt(0))
     let place = Number(id.charAt(2))
 
     let colour = cell.lastChild.classList[0]
-    let countRight = 0
+    let countR = 0
+    let countL = 0
 
-    for (let i = 1; i < 4; i++) { // CHECK VERTICAL
+    for (let i = 1; i < 4; i++) {
         let next = document.getElementById(`${column + i}.${place}`)
 
         if (next === null || next.lastChild === null) {
-            return false
+            break
         } else if (next.lastChild.classList[0] === colour) {
-            countRight += 1
+            countR += 1
         }
     }
 
-    if (countRight === 3) {
+    for (let i = 1; i < 4; i++) {
+        let next = document.getElementById(`${column - i}.${place}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countL += 1
+        }
+    }
+
+    if (countR === 3 || countL === 3) { 
         return true
     }
+
     return false
-}
-function winCheckLeft(cell) {
+} // FUNÇÃO QUE CHECA LADOS
+function winCheckDiag(cell) {
     let id = cell.id
     let column = Number(id.charAt(0))
     let place = Number(id.charAt(2))
 
     let colour = cell.lastChild.classList[0]
-    let countLeft = 0
+    let countR = 0
+    let countL = 0
 
-    for (let i = 1; i < 4; i++) { // CHECK VERTICAL
-        let next = document.getElementById(`${column - i}.${place}`)
+    for (let i = 1; i < 4; i++) {
+        let next = document.getElementById(`${column - i}.${place - i}`)
 
         if (next === null || next.lastChild === null) {
-            return false
+            break
         } else if (next.lastChild.classList[0] === colour) {
-            countLeft += 1
+            countR += 1
         }
     }
 
-    if (countLeft === 3) {
+    for (let i = 1; i < 4; i++) {
+        let next = document.getElementById(`${column + i}.${place - i}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countL += 1
+        }
+    }
+
+    if (countR === 3 || countL === 3) { 
         return true
     }
-    return false
-}
 
-// FUNÇÃO QUE ENVELOPA TODAS AS OUTRAS winCheck
+    return false
+} // FUNÇÃO QUE CHECA DIAGONAIS
 function winCheck(coord) {
-    if (winCheckVertical(coord) === true) {
+    if (winCheckUp(coord)) {
         return true
-    } else if (winCheckRight(coord) === true) {
+    } else if (winCheckSides(coord)) {
         return true
-    } else if (winCheckLeft(coord) === true) {
-        return true
+    } else if (winCheckDiag(coord)) {
+        return true    
     } else {
         return false
     }
-}
+} // FUNÇÃO QUE ENVELOPA TODAS
 
 
 
 
 const modalFinal = document.querySelector('.modal_container');
-console.log(modalFinal)
 const botaoReset = document.getElementById('botao_reset');
 
 // condição de vitória completa
 
-    modalFinal.classList.add('ativo');
-    botaoReset.addEventListener('click', function(){
-        location.reload();
+modalFinal.classList.add('ativo');
+botaoReset.addEventListener('click', function () {
+    location.reload();
 
-    })
+})
 // Aplicando evento no botão reset
