@@ -18,7 +18,6 @@ function getName() {
     let nameText = document.createElement('h1')
     nameText.innerText = name
     player.appendChild(nameText)
-    return name
 }
 
 // FUNÇÃO DE CRIAR TABULEIRO DE JOGO
@@ -60,18 +59,18 @@ for (let i = 0; i < colunas.length; i++) {
                     disco.classList = "red"
                     cell.appendChild(disco)
                     lastplay = cell
-                    if (winCheckVertical(lastplay) === true) { console.log(getName() + ' venceu') }
-                    if (winCheckRight(lastplay) === true) { console.log(getName() + ' venceu') }
-                    if (winCheckLeft(lastplay) === true) { console.log(getName() + ' venceu') }
+                    if (winCheck(lastplay) === true) {
+                        console.log("Vermelho venceu.")
+                    }
                     escolha = false
                     break
                 } else {
                     disco.classList = "black"
                     cell.appendChild(disco)
                     lastplay = cell
-                    if (winCheckVertical(lastplay) === true) { console.log('Preto venceu') }
-                    if (winCheckRight(lastplay) === true) { console.log('Preto venceu') }
-                    if (winCheckLeft(lastplay) === true) { console.log('Preto venceu') }
+                    if (winCheck(lastplay) === true) {
+                        console.log("Preto venceu.")
+                    }
                     escolha = true
                     break
                 }
@@ -79,6 +78,7 @@ for (let i = 0; i < colunas.length; i++) {
         }
     })
 }
+
 
 function winCheckVertical(cell) {
     let id = cell.id
@@ -103,7 +103,6 @@ function winCheckVertical(cell) {
     }
     return false
 }
-
 function winCheckRight(cell) {
     let id = cell.id
     let column = Number(id.charAt(0))
@@ -111,7 +110,6 @@ function winCheckRight(cell) {
 
     let colour = cell.lastChild.classList[0]
     let countRight = 0
-    let countLeft = 0
 
     for (let i = 1; i < 4; i++) { // CHECK VERTICAL
         let next = document.getElementById(`${column + i}.${place}`)
@@ -128,14 +126,12 @@ function winCheckRight(cell) {
     }
     return false
 }
-
 function winCheckLeft(cell) {
     let id = cell.id
     let column = Number(id.charAt(0))
     let place = Number(id.charAt(2))
 
     let colour = cell.lastChild.classList[0]
-    let countRight = 0
     let countLeft = 0
 
     for (let i = 1; i < 4; i++) { // CHECK VERTICAL
@@ -144,12 +140,25 @@ function winCheckLeft(cell) {
         if (next === null || next.lastChild === null) {
             return false
         } else if (next.lastChild.classList[0] === colour) {
-            countRight += 1
+            countLeft += 1
         }
     }
 
-    if (countRight === 3) {
+    if (countLeft === 3) {
         return true
     }
     return false
+}
+
+// FUNÇÃO QUE ENVELOPA TODAS AS OUTRAS winCheck
+function winCheck(coord) {
+    if (winCheckVertical(coord) === true) {
+        return true
+    } else if (winCheckRight(coord) === true) {
+        return true
+    } else if (winCheckLeft(coord) === true) {
+        return true
+    } else {
+        return false
+    }
 }
