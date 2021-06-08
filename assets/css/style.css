@@ -66,6 +66,8 @@ main {
     width: 300px;
     height: 245px;
     padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 4px 5px 18px 11px grey;
 }
 
 .table__column {
@@ -152,6 +154,9 @@ main {
     border-radius: 100%;
     width: 7vh;
     height: 7vh;
+}
+h1{
+    padding: 8px;
 }
 
 @media screen and (min-width: 680px) {
