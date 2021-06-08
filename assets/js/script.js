@@ -34,24 +34,46 @@ function gameStart() {
 
     for (let i = 0; i < 7; i++) {
         let colunaAtual = document.getElementById(`${i}`)
-        for (let j = 0; j < 5; j++) {
+        for (let j = 0; j < 6; j++) {
             let celula = document.createElement('div')
             celula.classList.add('table__cell')
             celula.id = i + "." + j
             colunaAtual.appendChild(celula)
         }
     }
+
+    // Pegar as colunas e dar eventos respectivos 
+    const colunas = document.querySelectorAll("div.table__column")
+    let escolha = true 
+    for (let i = 0; i < colunas.length; i++) {
+        colunas[i].addEventListener("click" , function(){
+            const disco = document.createElement("div")
+           
+
+            for (let j = 0;j < 6;j++) {
+                
+                let cell = colunas[i].children[j]
+
+
+                if (cell.childElementCount == 0){
+                    console.log(escolha)
+                if ( escolha === true ){
+                    disco.classList = "red"
+                    cell.appendChild(disco)
+                }else{
+                    disco.classList = "black"
+                    cell.appendChild(disco)
+                }
+            }
+            if (escolha == true){
+                escolha = false
+            }else{
+                escolha = true 
+            }
+        }
+ 
+            
+        })
+        
+    }
 }
-
-
-let container1 = document.getElementById('container_discos')
-
-/* Criando o disco preto e vermelho */
-
-let blocoP = document.createElement("div");
-blocoP.id = "Preto";
-container1.appendChild(blocoP);
-
-let blocoV = document.createElement("div");
-blocoV.id = "Vermelho";
-container1.appendChild(blocoV);
