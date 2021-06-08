@@ -60,16 +60,15 @@ function gameStart() {
                 if ( escolha === true ){
                     disco.classList = "red"
                     cell.appendChild(disco)
+                    escolha = false
+                    break
                 }else{
                     disco.classList = "black"
                     cell.appendChild(disco)
+                    escolha = true
+                    break
                 }
-            }
-            if (escolha == true){
-                escolha = false
-            }else{
-                escolha = true 
-            }
+            } 
         }
  
             
