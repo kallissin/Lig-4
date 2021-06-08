@@ -42,3 +42,16 @@ function gameStart() {
         }
     }
 }
+
+
+let container1 = document.getElementById('container_discos')
+
+/* Criando o disco preto e vermelho */
+
+let blocoP = document.createElement("div");
+blocoP.id = "Preto";
+container1.appendChild(blocoP);
+
+let blocoV = document.createElement("div");
+blocoV.id = "Vermelho";
+container1.appendChild(blocoV);
