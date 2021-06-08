@@ -51,20 +51,21 @@ function gameStart() {
                 let cell = colunas[i].children[j]
                 if (cell.childElementCount == 0) {
                     console.log(escolha)
-                    if (escolha === true) {
-                        disco.classList = "red"
-                        cell.appendChild(disco)
-                    } else {
-                        disco.classList = "black"
-                        cell.appendChild(disco)
-                    }
-                }
-                if (escolha === true) {
+                if ( escolha === true ){
+                    disco.classList = "red"
+                    cell.appendChild(disco)
                     escolha = false
-                } else {
+                    break
+                }else{
+                    disco.classList = "black"
+                    cell.appendChild(disco)
                     escolha = true
+                    break
                 }
-            }
+            } 
+        }
+ 
+            
         })
     }
 }
