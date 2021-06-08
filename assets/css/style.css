@@ -120,6 +120,32 @@ main {
     font-size: 0.7rem;
 }
 
+#container_discos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 20vh;
+    border: 2px solid black;
+}
+
+#Preto {
+    border: 0;
+    background-color: black;
+    border-radius: 100%;
+    width: 7vh;
+    height: 7vh;
+}
+
+#Vermelho {
+    border: 0;
+    background-color: red;
+    border-radius: 100%;
+    width: 7vh;
+    height: 7vh;
+}
+
 @media screen and (min-width: 680px) {
     .table {
         width: 518px;
