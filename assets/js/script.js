@@ -56,17 +56,16 @@ function gameStart() {
 
 
                 if (cell.childElementCount == 0){
-                    console.log(escolha)
                 if ( escolha === true ){
                     disco.classList = "red"
                     cell.appendChild(disco)
-                    escolha = false
-                    break
+                    return escolha = false
+                   
                 }else{
                     disco.classList = "black"
                     cell.appendChild(disco)
-                    escolha = true
-                    break
+                    return escolha = true
+                    
                 }
             } 
         }
