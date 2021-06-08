@@ -10,11 +10,9 @@ start__button.addEventListener('click', function () {
 function getName() {
     let input = document.getElementById('name')
     let name = input.value
-
     if (name.length > 8) {
         name = name.substring(0, 8) + "..."
     }
-
     let player = document.getElementById('jogador')
     let nameText = document.createElement('h1')
     nameText.innerText = name
@@ -44,36 +42,29 @@ function gameStart() {
 
     // Pegar as colunas e dar eventos respectivos 
     const colunas = document.querySelectorAll("div.table__column")
-    let escolha = true 
+    let escolha = true
     for (let i = 0; i < colunas.length; i++) {
-        colunas[i].addEventListener("click" , function(){
+        colunas[i].addEventListener("click", function () {
             const disco = document.createElement("div")
-           
 
-            for (let j = 0;j < 6;j++) {
-                
+            for (let j = 0; j < 6; j++) {
                 let cell = colunas[i].children[j]
-
-
-                if (cell.childElementCount == 0){
+                if (cell.childElementCount == 0) {
                     console.log(escolha)
-                if ( escolha === true ){
-                    disco.classList = "red"
-                    cell.appendChild(disco)
-                }else{
-                    disco.classList = "black"
-                    cell.appendChild(disco)
+                    if (escolha === true) {
+                        disco.classList = "red"
+                        cell.appendChild(disco)
+                    } else {
+                        disco.classList = "black"
+                        cell.appendChild(disco)
+                    }
+                }
+                if (escolha === true) {
+                    escolha = false
+                } else {
+                    escolha = true
                 }
             }
-            if (escolha == true){
-                escolha = false
-            }else{
-                escolha = true 
-            }
-        }
- 
-            
         })
-        
     }
 }
