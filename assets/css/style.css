@@ -134,16 +134,16 @@ main {
     border: 0;
     background-color: black;
     border-radius: 100%;
-    width: 4.5vh;
-    height: 4.5vh;
+    width: 7vh;
+    height: 7vh;
 }
 
 #Vermelho {
     border: 0;
     background-color: red;
     border-radius: 100%;
-    width: 4.5vh;
-    height: 4.5vh;
+    width: 7vh;
+    height: 7vh;
 }
 
 @media screen and (min-width: 680px) {
