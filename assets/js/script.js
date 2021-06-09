@@ -196,7 +196,10 @@ function winCheck(coord) {
         return true
     } else if (winCheckDiag(coord)) {
         return true    
-    } else {
+    } else if (empate()){
+        return true
+    } 
+    else {
         return false
     }
 } // FUNÇÃO QUE ENVELOPA TODAS
@@ -221,19 +224,15 @@ const mostraModal = () => {
 
 
 const empate = () => {
-    
     let totalCelulas = 0;
-    
     for(let i = 0; i < 7; i++) {
-        
         for(let j = 0; j < 6; j++) {
-           
             totalCelulas += colunas[i].childNodes[j].childElementCount;
-            console.log(totalCelulas)
             if(totalCelulas === 42){
-                console.log("empate")
+                const msgEmpate = document.querySelector('#h2_resultado')
+                msgEmpate.innerHTML = '';
+                msgEmpate.innerText = `Empate!`
             }
-            
         }
     }
     console.log("continua")
