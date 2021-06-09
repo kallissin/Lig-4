@@ -95,7 +95,6 @@ for (let i = 0; i < colunas.length; i++) {
     })
 }
 
-
 function winCheckUp(cell) {
     let id = cell.id
     let column = Number(id.charAt(0))
@@ -161,20 +160,12 @@ function winCheckDiag(cell) {
 
     let colour = cell.lastChild.classList[0]
     let countR = 0
+    let countRUp = 0
     let countL = 0
+    let countLUp = 0
 
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO ESQUERDA
         let next = document.getElementById(`${column - i}.${place - i}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countR += 1
-        }
-    }
-
-    for (let i = 1; i < 4; i++) {
-        let next = document.getElementById(`${column + i}.${place - i}`)
 
         if (next === null || next.lastChild === null) {
             break
@@ -183,7 +174,37 @@ function winCheckDiag(cell) {
         }
     }
 
-    if (countR === 3 || countL === 3) { 
+    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA DIREITA
+        let next = document.getElementById(`${column + i}.${place + i}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countRUp += 1
+        }
+    }
+
+    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA ESQUERDA
+        let next = document.getElementById(`${column - i}.${place + i}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countLUp += 1
+        }
+    }
+
+    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO DIREITA
+        let next = document.getElementById(`${column + i}.${place - i}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countR += 1
+        }
+    }
+
+    if (countR === 3 || countL === 3 || countRUp === 3 || countLUp === 3) { 
         return true
     }
 
@@ -204,9 +225,6 @@ function winCheck(coord) {
     }
 } // FUNÇÃO QUE ENVELOPA TODAS
 
-
-
-
 const mostraModal = () => {
     const modalFinal = document.querySelector('.modal_container');
     const botaoReset = document.getElementById('botao_reset');
@@ -221,7 +239,6 @@ const mostraModal = () => {
     })
     // Aplicando evento no botão reset
 }
-
 
 const empate = () => {
     let totalCelulas = 0;
