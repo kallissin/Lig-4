@@ -1,4 +1,7 @@
 let start__button = document.getElementById('start')
+let nomePlayer1Winner;
+let nomePlayer2Winner;
+let winner;
 
 start__button.addEventListener('click', function () {
     let modal = document.getElementsByClassName('start__screen')
@@ -8,14 +11,25 @@ start__button.addEventListener('click', function () {
 
 function getName() {
     let input = document.getElementById('name')
+    let input_2 = document.getElementById('name_2')
     let name = input.value
+    let name_2 = input_2.value
     if (name.length > 8) {
         name = name.substring(0, 8) + "..."
+        name_2 = name_2.substring(0, 8) + "..."
     }
     let player = document.getElementById('jogador')
+    let player_2 = document.getElementById('jogador_2')
     let nameText = document.createElement('h1')
+    let nameText_2 = document.createElement('h1')
     nameText.innerText = name
+    nameText_2.innerText = name_2
     player.appendChild(nameText)
+    player_2.appendChild(nameText_2)
+
+    nomePlayer1Winner = name;
+    nomePlayer2Winner = name_2;
+    console.log(nomePlayer1Winner,nomePlayer2Winner)
 } // FUNÇÃO DE COLETAR NOME NA TELA INICIAL
 
 
@@ -59,6 +73,8 @@ for (let i = 0; i < colunas.length; i++) {
                     if (winCheck(lastplay)) {
                         console.log("Vermelho venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 1) ENTRA AQUI
+                        winner = nomePlayer1Winner;
+                        return mostraModal()
                     }
                     return escolha = false
                     
@@ -70,6 +86,8 @@ for (let i = 0; i < colunas.length; i++) {
                     if (winCheck(lastplay) === true) {
                         console.log("Preto venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
+                        winner = nomePlayer2Winner;
+                        return mostraModal()
                     }
                     return escolha = true
                     
@@ -78,7 +96,6 @@ for (let i = 0; i < colunas.length; i++) {
         }
     })
 }
-
 
 function winCheckUp(cell) {
     let id = cell.id
@@ -145,20 +162,12 @@ function winCheckDiag(cell) {
 
     let colour = cell.lastChild.classList[0]
     let countR = 0
+    let countRUp = 0
     let countL = 0
+    let countLUp = 0
 
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO ESQUERDA
         let next = document.getElementById(`${column - i}.${place - i}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countR += 1
-        }
-    }
-
-    for (let i = 1; i < 4; i++) {
-        let next = document.getElementById(`${column + i}.${place - i}`)
 
         if (next === null || next.lastChild === null) {
             break
@@ -167,7 +176,37 @@ function winCheckDiag(cell) {
         }
     }
 
-    if (countR === 3 || countL === 3) { 
+    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA DIREITA
+        let next = document.getElementById(`${column + i}.${place + i}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countRUp += 1
+        }
+    }
+
+    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA ESQUERDA
+        let next = document.getElementById(`${column - i}.${place + i}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countLUp += 1
+        }
+    }
+
+    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO DIREITA
+        let next = document.getElementById(`${column + i}.${place - i}`)
+
+        if (next === null || next.lastChild === null) {
+            break
+        } else if (next.lastChild.classList[0] === colour) {
+            countR += 1
+        }
+    }
+
+    if (countR === 3 || countL === 3 || countRUp === 3 || countLUp === 3) { 
         return true
     }
 
@@ -185,17 +224,17 @@ function winCheck(coord) {
     }
 } // FUNÇÃO QUE ENVELOPA TODAS
 
+const mostraModal = () => {
+    const modalFinal = document.querySelector('.modal_container');
+    const botaoReset = document.getElementById('botao_reset');
+    
+    const msgDeVitoria = document.querySelector('#h2_resultado')
+    msgDeVitoria.innerHTML = '';
+    msgDeVitoria.innerText = `O jogador ${winner} vence o jogo!`
 
-
-
-const modalFinal = document.querySelector('.modal_container');
-const botaoReset = document.getElementById('botao_reset');
-
-// condição de vitória completa
-
-modalFinal.classList.add('.ativo');
-botaoReset.addEventListener('click', function () {
-    location.reload();
-
-})
-// Aplicando evento no botão reset
+    modalFinal.classList.add('ativo');
+    botaoReset.addEventListener('click', function () {
+        location.reload();
+    })
+    // Aplicando evento no botão reset
+}
