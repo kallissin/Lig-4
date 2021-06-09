@@ -53,24 +53,26 @@ for (let i = 0; i < colunas.length; i++) {
             if (cell.childElementCount === 0) {
                 if (escolha === true) {
                     disco.classList = "red"
+                    disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay)) {
                         console.log("Vermelho venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 1) ENTRA AQUI
                     }
-                    escolha = false
-                    break
+                    return escolha = false
+                    
                 } else {
                     disco.classList = "black"
+                    disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay) === true) {
                         console.log("Preto venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
                     }
-                    escolha = true
-                    break
+                    return escolha = true
+                    
                 }
             }
         }
