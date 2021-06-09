@@ -106,7 +106,7 @@ function winCheckUp(cell) {
 
     for (let i = 1; i < 4; i++) { // CHECK VERTICAL
         let next = document.getElementById(`${column}.${place - i}`)
-
+        
         if (next === null) {
             return false
         } else if (next.lastChild.classList[0] === colour) {
@@ -219,3 +219,22 @@ const mostraModal = () => {
     // Aplicando evento no botão reset
 }
 
+
+const empate = () => {
+    
+    let totalCelulas = 0;
+    
+    for(let i = 0; i < 7; i++) {
+        
+        for(let j = 0; j < 6; j++) {
+           
+            totalCelulas += colunas[i].childNodes[j].childElementCount;
+            console.log(totalCelulas)
+            if(totalCelulas === 42){
+                console.log("empate")
+            }
+            
+        }
+    }
+    console.log("continua")
+}
