@@ -27,17 +27,17 @@ function gameStart() {
         coluna.classList.add('table__column')
         coluna.id = i
         mainscreen.appendChild(coluna)
-    }
 
-    for (let i = 0; i < 7; i++) {
-        let colunaAtual = document.getElementById(`${i}`)
         for (let j = 0; j < 6; j++) {
             let celula = document.createElement('div')
             celula.classList.add('table__cell')
             celula.id = i + "." + j
-            colunaAtual.appendChild(celula)
+            coluna.appendChild(celula)
         }
     }
+
+
+
 } // FUNÇÃO DE CRIAR TABULEIRO DE JOGO
 
 gameStart()
@@ -45,7 +45,7 @@ let lastplay = 0
 let colunas = document.querySelectorAll("div.table__column")
 let escolha = true
 for (let i = 0; i < colunas.length; i++) {
-    colunas[i].addEventListener("click", function () {
+    colunas[i].addEventListener("click", () => {
         const disco = document.createElement("div")
 
         for (let j = 0; j < 6; j++) {
@@ -65,7 +65,7 @@ for (let i = 0; i < colunas.length; i++) {
                     disco.classList = "black"
                     cell.appendChild(disco)
                     lastplay = cell
-                    if (winCheck(lastplay) === true) {
+                    if (winCheck(lastplay)) {
                         console.log("Preto venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
                     }
@@ -73,6 +73,7 @@ for (let i = 0; i < colunas.length; i++) {
                     break
                 }
             }
+            
         }
     })
 }
@@ -84,11 +85,12 @@ function winCheckUp(cell) {
     let place = Number(id.charAt(2))
 
     let colour = cell.lastChild.classList[0]
+
     let count = 0
 
     for (let i = 1; i < 4; i++) { // CHECK VERTICAL
         let next = document.getElementById(`${column}.${place - i}`)
-
+        console.log(next);
         if (next === null) {
             return false
         } else if (next.lastChild.classList[0] === colour) {
