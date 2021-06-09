@@ -8,14 +8,23 @@ start__button.addEventListener('click', function () {
 
 function getName() {
     let input = document.getElementById('name')
+    let input2 = document.getElementById('name_2')
     let name = input.value
-    if (name.length > 8) {
-        name = name.substring(0, 8) + "..."
+    let name2 = input2.value
+    if (name.length > 10) {
+        name = name.substring(0, 10) + "..."
+    }
+    if (name2.length > 10) {
+        name2 = name2.substring(0, 10) + "..."
     }
     let player = document.getElementById('jogador')
+    let player2 = document.getElementById('jogador2')
     let nameText = document.createElement('h1')
+    let nameText2 = document.createElement('h1')
     nameText.innerText = name
+    nameText2.innerText = name2
     player.appendChild(nameText)
+    player2.appendChild(nameText2)
 } // FUNÇÃO DE COLETAR NOME NA TELA INICIAL
 
 
