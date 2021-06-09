@@ -1,4 +1,7 @@
 let start__button = document.getElementById('start')
+let nomePlayer1Winner;
+let nomePlayer2Winner;
+let winner;
 
 start__button.addEventListener('click', function () {
     let modal = document.getElementsByClassName('start__screen')
@@ -8,14 +11,25 @@ start__button.addEventListener('click', function () {
 
 function getName() {
     let input = document.getElementById('name')
+    let input_2 = document.getElementById('name_2')
     let name = input.value
+    let name_2 = input_2.value
     if (name.length > 8) {
         name = name.substring(0, 8) + "..."
+        name_2 = name_2.substring(0, 8) + "..."
     }
     let player = document.getElementById('jogador')
+    let player_2 = document.getElementById('jogador_2')
     let nameText = document.createElement('h1')
+    let nameText_2 = document.createElement('h1')
     nameText.innerText = name
+    nameText_2.innerText = name_2
     player.appendChild(nameText)
+    player_2.appendChild(nameText_2)
+
+    nomePlayer1Winner = name;
+    nomePlayer2Winner = name_2;
+    console.log(nomePlayer1Winner,nomePlayer2Winner)
 } // FUNÇÃO DE COLETAR NOME NA TELA INICIAL
 
 
@@ -58,6 +72,8 @@ for (let i = 0; i < colunas.length; i++) {
                     if (winCheck(lastplay)) {
                         console.log("Vermelho venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 1) ENTRA AQUI
+                        winner = nomePlayer1Winner;
+                        return mostraModal()
                     }
                     escolha = false
                     break
@@ -68,6 +84,8 @@ for (let i = 0; i < colunas.length; i++) {
                     if (winCheck(lastplay) === true) {
                         console.log("Preto venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
+                        winner = nomePlayer2Winner;
+                        return mostraModal()
                     }
                     escolha = true
                     break
@@ -186,14 +204,18 @@ function winCheck(coord) {
 
 
 
-const modalFinal = document.querySelector('.modal_container');
-const botaoReset = document.getElementById('botao_reset');
+const mostraModal = () => {
+    const modalFinal = document.querySelector('.modal_container');
+    const botaoReset = document.getElementById('botao_reset');
+    
+    const msgDeVitoria = document.querySelector('#h2_resultado')
+    msgDeVitoria.innerHTML = '';
+    msgDeVitoria.innerText = `O jogador ${winner} vence o jogo!`
 
-// condição de vitória completa
+    modalFinal.classList.add('ativo');
+    botaoReset.addEventListener('click', function () {
+        location.reload();
+    })
+    // Aplicando evento no botão reset
+}
 
-modalFinal.classList.add('.ativo');
-botaoReset.addEventListener('click', function () {
-    location.reload();
-
-})
-// Aplicando evento no botão reset
