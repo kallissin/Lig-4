@@ -186,27 +186,26 @@ h1{
 
 /* Modal final e botão reset */
 
-
-/* .modal_container{
+.modal_container{
     display: none;
-} */
+}
 
 .modal_container.ativo{
-    /*position: fixed;
+    position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    bottom: 0;*/
+    bottom: 0;
     background: rgba(0,0,0,.5);
-    /*display: flex;*/
+    display: flex;
     justify-content: center;
     align-items: center;
     
 }
 
 .modal_final{
-    height: 300px;
-    width: 400px;
+    height: 51vh;
+    width: 87vw;
     background-color: white;
     text-align: center;
     display: flex;
@@ -273,5 +272,10 @@ h1{
 
     .container {
         margin: 12vw auto;
+    }
+
+    .modal_final{
+        height: 49vh;
+        width: 31vw;
     }
 }
