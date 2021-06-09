@@ -191,7 +191,7 @@ const botaoReset = document.getElementById('botao_reset');
 
 // condição de vitória completa
 
-modalFinal.classList.add('ativo');
+modalFinal.classList.add('.ativo');
 botaoReset.addEventListener('click', function () {
     location.reload();
 
