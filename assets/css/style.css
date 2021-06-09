@@ -141,6 +141,8 @@ div.container__jogo {
     color: blanchedalmond;
     background-color: hsl(0, 50%, 50%);
     border-radius: 1rem;
+    text-align: center;
+    width: 7.5rem;
 }
 
 .player__2 {
@@ -150,6 +152,8 @@ div.container__jogo {
     color: blanchedalmond;
     background-color: hsl(240, 9%, 21%);
     border-radius: 1rem;
+    text-align: center;
+    width: 7.5rem;
 }
 
 #container_discos {
@@ -261,12 +265,14 @@ h1{
         position: absolute;
         left: 5%;
         font-size: 0.7rem;
+        width: 8.5rem;
     }
 
     .player__2 {
         position: absolute;
         right: 5%;
         font-size: 0.7rem;
+        width: 8.5rem;
     }
 
     .start__input {
