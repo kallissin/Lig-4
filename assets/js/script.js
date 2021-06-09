@@ -74,7 +74,7 @@ for (let i = 0; i < colunas.length; i++) {
                         console.log("Vermelho venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 1) ENTRA AQUI
                         winner = nomePlayer1Winner;
-                        return mostraModal()
+                        return mostraModal(winner)
                     }
                     return escolha = false
                     
@@ -87,7 +87,7 @@ for (let i = 0; i < colunas.length; i++) {
                         console.log("Preto venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
                         winner = nomePlayer2Winner;
-                        return mostraModal()
+                        return mostraModal(winner)
                     }
                     return escolha = true
                     
@@ -219,22 +219,25 @@ function winCheck(coord) {
         return true
     } else if (winCheckDiag(coord)) {
         return true    
-    } else if (empate()){
-        return true
-    } 
-    else {
+    } else{
+        empate();
         return false
     }
+
 } // FUNÇÃO QUE ENVELOPA TODAS
 
-const mostraModal = () => {
+
+const mostraModal = (value) => {
     const modalFinal = document.querySelector('.modal_container');
     const botaoReset = document.getElementById('botao_reset');
     
     const msgDeVitoria = document.querySelector('#h2_resultado')
     msgDeVitoria.innerHTML = '';
-    msgDeVitoria.innerText = `O jogador ${winner} vence o jogo!`
-
+    if (value === 'Empate!') {
+        msgDeVitoria.innerText = `${value}`;
+    } else {
+        msgDeVitoria.innerText = `O jogador ${value} vence o jogo!`
+    }
     modalFinal.classList.add('ativo');
     botaoReset.addEventListener('click', function () {
         location.reload();
@@ -247,12 +250,11 @@ const empate = () => {
     for(let i = 0; i < 7; i++) {
         for(let j = 0; j < 6; j++) {
             totalCelulas += colunas[i].childNodes[j].childElementCount;
-            if(totalCelulas === 42){
-                const msgEmpate = document.querySelector('#h2_resultado')
-                msgEmpate.innerHTML = '';
-                msgEmpate.innerText = `Empate!`
+            console.log(totalCelulas);
+            if(totalCelulas === 42){ 
+                let msgEmpate = 'Empate!'
+                mostraModal(msgEmpate)
             }
         }
     }
-    console.log("continua")
 }
