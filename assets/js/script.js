@@ -107,7 +107,7 @@ function winCheckUp(cell) {
 
     for (let i = 1; i < 4; i++) { // CHECK VERTICAL
         let next = document.getElementById(`${column}.${place - i}`)
-
+        
         if (next === null) {
             return false
         } else if (next.lastChild.classList[0] === colour) {
@@ -219,7 +219,10 @@ function winCheck(coord) {
         return true
     } else if (winCheckDiag(coord)) {
         return true    
-    } else {
+    } else if (empate()){
+        return true
+    } 
+    else {
         return false
     }
 } // FUNÇÃO QUE ENVELOPA TODAS
@@ -237,4 +240,19 @@ const mostraModal = () => {
         location.reload();
     })
     // Aplicando evento no botão reset
+}
+
+const empate = () => {
+    let totalCelulas = 0;
+    for(let i = 0; i < 7; i++) {
+        for(let j = 0; j < 6; j++) {
+            totalCelulas += colunas[i].childNodes[j].childElementCount;
+            if(totalCelulas === 42){
+                const msgEmpate = document.querySelector('#h2_resultado')
+                msgEmpate.innerHTML = '';
+                msgEmpate.innerText = `Empate!`
+            }
+        }
+    }
+    console.log("continua")
 }
