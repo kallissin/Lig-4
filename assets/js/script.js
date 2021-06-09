@@ -67,6 +67,7 @@ for (let i = 0; i < colunas.length; i++) {
             if (cell.childElementCount === 0) {
                 if (escolha === true) {
                     disco.classList = "red"
+                    disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay)) {
@@ -75,10 +76,11 @@ for (let i = 0; i < colunas.length; i++) {
                         winner = nomePlayer1Winner;
                         return mostraModal()
                     }
-                    escolha = false
-                    break
+                    return escolha = false
+                    
                 } else {
                     disco.classList = "black"
+                    disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay) === true) {
@@ -87,8 +89,8 @@ for (let i = 0; i < colunas.length; i++) {
                         winner = nomePlayer2Winner;
                         return mostraModal()
                     }
-                    escolha = true
-                    break
+                    return escolha = true
+                    
                 }
             }
         }

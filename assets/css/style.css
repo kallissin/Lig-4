@@ -3,6 +3,9 @@ body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
 }
+.hidden{
+    display: none;
+}
 
 .hidden {
     display: none;
@@ -225,6 +228,19 @@ h1{
 
 #h2_resultado {
     font-size: 1.5rem;
+}
+.fallen__disc{
+    position: relative;
+    animation: 0.7s ease-in  reverse both running fallen;
+}
+@keyframes fallen {
+   0% {
+    top: 0%;
+    }
+   100%{
+    top: -600%;
+   }  
+    
 }
 
 
