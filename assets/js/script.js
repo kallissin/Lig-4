@@ -29,7 +29,6 @@ function getName() {
 
     nomePlayer1Winner = name;
     nomePlayer2Winner = name_2;
-    console.log(nomePlayer1Winner,nomePlayer2Winner)
 } // FUNÇÃO DE COLETAR NOME NA TELA INICIAL
 
 
@@ -50,8 +49,6 @@ function gameStart() {
         }
     }
 
-
-
 } // FUNÇÃO DE CRIAR TABULEIRO DE JOGO
 
 gameStart()
@@ -71,7 +68,6 @@ for (let i = 0; i < colunas.length; i++) {
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay)) {
-                        console.log("Vermelho venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 1) ENTRA AQUI
                         winner = nomePlayer1Winner;
                         return mostraModal(winner)
@@ -84,7 +80,6 @@ for (let i = 0; i < colunas.length; i++) {
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay)) {
-                        console.log("Preto venceu.") // remover console.log
                         // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
                         winner = nomePlayer2Winner;
                         return mostraModal(winner)
@@ -109,7 +104,6 @@ function winCheckUp(cell) {
 
     for (let i = 1; i < 4; i++) { // CHECK VERTICAL
         let next = document.getElementById(`${column}.${place - i}`)
-        console.log(next);
         if (next === null) {
             return false
         } else if (next.lastChild.classList[0] === colour) {
@@ -252,7 +246,6 @@ const empate = () => {
     for(let i = 0; i < 7; i++) {
         for(let j = 0; j < 6; j++) {
             totalCelulas += colunas[i].childNodes[j].childElementCount;
-            console.log(totalCelulas);
             if(totalCelulas === 42){ 
                 let msgEmpate = 'Empate!'
                 mostraModal(msgEmpate)

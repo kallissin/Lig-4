@@ -7,10 +7,6 @@ body {
     display: none;
 }
 
-.hidden {
-    display: none;
-}
-
 div.container__jogo {
     display: flex;
     flex-direction: column;
@@ -98,9 +94,6 @@ div.container__jogo {
 }
 
 .table__cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 100%;
     background-color: hsl(0, 0%, 89%);
@@ -166,21 +159,6 @@ div.container__jogo {
     border: 2px solid black;
 }
 
-#Preto {
-    border: 0;
-    background-color: black;
-    border-radius: 100%;
-    width: 7vh;
-    height: 7vh;
-}
-
-#Vermelho {
-    border: 0;
-    background-color: red;
-    border-radius: 100%;
-    width: 7vh;
-    height: 7vh;
-}
 h1{
     padding: 8px;
 }
@@ -246,9 +224,6 @@ h1{
    }  
     
 }
-
-
-
 
 
 @media screen and (min-width: 680px) {
