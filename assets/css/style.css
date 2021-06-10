@@ -118,7 +118,9 @@ body {
 
 .player-screen {
     display: flex;
-    position: relative;
+    /*position: relative;*/
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     width: 20rem;
     height: 100px;
@@ -136,14 +138,14 @@ body {
 }
 
 .player1 {
-    position: absolute;
-    left: 5%;
+    /*position: absolute;*/
+    /*left: 5%;*/
     background-color: hsl(0, 50%, 50%);
 }
 
 .player2 {
-    position: absolute;
-    right: 5%;
+    /*position: absolute;*/
+    /*right: 5%;*/
     background-color: hsl(240, 9%, 21%); 
 }
 
@@ -167,7 +169,7 @@ h1{
     display: none;
 }*/
 
-.modal__result{
+.modal-result{
     position: fixed;
     top: 0;
     right: 0;
@@ -177,7 +179,7 @@ h1{
     z-index: 1;
 }
 
-.modal__result__container {
+.modal-result__container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,22 +187,26 @@ h1{
     width: 100vw;
 }
 
-.modal__result__content{
+.modal-result__content{
     height: 51vh;
     width: 87vw;
     background-color: white;
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 5px 8px black;
 }
 
+.modal-result__container-btn{
+    width: 100%;
+}
 
-.btn-reset {
-    width: 70%;
+.modal-result__btn {
+    width: 260px;
+    height: 45px;
     font-size: 20px;
     padding: 10px;
     background-color: #F49E4C;
@@ -209,9 +215,10 @@ h1{
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 2px 5px black;
+    font-weight: bold;
 }
 
-.modal__result__title {
+.modal-result__title {
     font-size: 1.5rem;
 }
 .fallen__disc{
@@ -271,7 +278,7 @@ h1{
         margin: 7vw auto;
     }
 
-    .modal__result__content{
+    .modal-result__content{
         height: 49vh;
         width: 31vw;
     }

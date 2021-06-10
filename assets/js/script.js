@@ -97,6 +97,15 @@ for (let i = 0; i < colunas.length; i++) {
     })
 }
 
+function clearCode() {
+    const cell = document.querySelectorAll('div.table__cell');
+
+    for (let i = 0; i < cell.length; i++) {
+        cell[i].innerHTML = '';
+    }
+    
+}
+
 function winCheckUp(cell) {
     let id = cell.id
     let column = Number(id.charAt(0))
@@ -214,10 +223,13 @@ function winCheckDiag(cell) {
 } // FUNÇÃO QUE CHECA DIAGONAIS
 function draw() {
     let totalCelulas = 0;
-    for(let i = 0; i < 7; i++) {
-        for(let j = 0; j < 6; j++) {
+    let quantColumn = 7;
+    let quantCell = 6
+    let calCell = quantColumn * quantCell
+    for(let i = 0; i < quantColumn; i++) {
+        for(let j = 0; j < quantCell; j++) {
             totalCelulas += colunas[i].childNodes[j].childElementCount;
-            if(totalCelulas === 42){ 
+            if(totalCelulas === calCell){ 
                 let msgEmpate = 'Empate!'
                 mostraModal(msgEmpate)
             }
@@ -241,9 +253,10 @@ function winCheck(coord) {
 
 const mostraModal = (value) => {
     
-    const modalFinal = document.querySelector('.modal__result');
-    const btnReset = document.getElementById('btn-reset');
-    const msgDeVitoria = document.getElementById('modal__result__title')
+    const modalFinal = document.querySelector('.modal-result');
+    const btnReset = document.getElementById('btn-home');
+    const msgDeVitoria = document.getElementById('modal-result__title');
+    const btnReplace = document.getElementById('btn-replace');
     msgDeVitoria.innerHTML = '';
     
     if (value === 'Empate!') {
@@ -258,6 +271,11 @@ const mostraModal = (value) => {
 
     btnReset.addEventListener('click', function () {
         location.reload();
+    })
+
+    btnReplace.addEventListener('click', function () {
+        clearCode();
+        modalFinal.classList.add('hidden');
     })
     // Aplicando evento no botão reset
 }
