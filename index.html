@@ -20,32 +20,30 @@
         <div class="container">
             <h1 class="start__title">Lig-4</h1>
             <div id="div_start__input">
-                <input class="start__input" id="name" type="text" value="" placeholder="Player 1 - Digite seu nome" autocomplete="off">
-                <input class="start__input" id="name_2" type="text" value="" placeholder="Player 2 - Digite seu nome" autocomplete="off">
+                <input class="start__input" id="name1" type="text" value="" placeholder="Player 1 - Digite seu nome" autocomplete="off">
+                <input class="start__input" id="name2" type="text" value="" placeholder="Player 2 - Digite seu nome" autocomplete="off">
             </div>
             <button id="start" class="start__button">Jogar</button>
         </div>
     </div>
 
+    <div class="modal__result hidden">
+        <div class="modal__result__container">
+            <div class="modal__result__content">
+                <h2 id="modal__result__title" class="modal__result__title"></h2>
+                <button id="btn-reset" class="btn-reset">JOGAR NOVAMENTE</button>
+            </div>
+        </div>
+    </div>
 
     <main>
-
-        
-        <div class="container__jogo">
-            <div id="table" class="table">
+        <div class="game">
+            <div id="game__table" class="game__table">
             </div>
-            <div class="player__screen">
-                <div id="jogador" class="player__1"></div>
-                <div id="jogador_2" class="player__2"></div>
+            <div class="player-screen">
+                <div id="player1" class="player1"></div>
+                <div id="player2" class="player2"></div>
             </div>
-
-            <div class="modal_container hidden">
-                <div class="modal_final">
-                    <h2 id="h2_resultado"></h2>
-                    <button id="botao_reset">JOGAR NOVAMENTE</button>
-                </div>
-            </div>
-
         </div>
     </main>
 

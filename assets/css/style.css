@@ -7,7 +7,7 @@ body {
     display: none;
 }
 
-div.container__jogo {
+.game {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -70,7 +70,7 @@ div.container__jogo {
     display: flex;
 }
 
-.table {
+.game__table {
     display: flex;
     flex-direction: row;
     justify-content: stretch;
@@ -116,7 +116,7 @@ div.container__jogo {
     height: 100%;
 }
 
-.player__screen {
+.player-screen {
     display: flex;
     position: relative;
     align-items: center;
@@ -127,7 +127,7 @@ div.container__jogo {
     border-radius: 1rem;
 }
 
-.player__1 {
+.player1 {
     position: absolute;
     left: 5%;
     font-size: 0.7rem;
@@ -136,9 +136,10 @@ div.container__jogo {
     border-radius: 1rem;
     text-align: center;
     width: 7.5rem;
+    height: 4.5rem;
 }
 
-.player__2 {
+.player2 {
     position: absolute;
     right: 5%;
     font-size: 0.7rem;
@@ -147,6 +148,7 @@ div.container__jogo {
     border-radius: 1rem;
     text-align: center;
     width: 7.5rem;
+    height: 4.5rem;
 }
 
 #container_discos {
@@ -165,24 +167,29 @@ h1{
 
 /* Modal final e botão reset */
 
-.modal_container{
+/*.modal_container{
     display: none;
-}
+}*/
 
-.modal_container.ativo{
+.modal__result{
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
     background: rgba(0,0,0,.5);
+    z-index: 1;
+}
+
+.modal__result__container {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    height: 100vh;
+    width: 100vw;
 }
 
-.modal_final{
+.modal__result__content{
     height: 51vh;
     width: 87vw;
     background-color: white;
@@ -196,7 +203,7 @@ h1{
 }
 
 
-#botao_reset {
+.btn-reset {
     width: 70%;
     font-size: 20px;
     padding: 10px;
@@ -208,7 +215,7 @@ h1{
     box-shadow: 0 2px 5px black;
 }
 
-#h2_resultado {
+.modal__result__title {
     font-size: 1.5rem;
 }
 .fallen__disc{
@@ -227,7 +234,7 @@ h1{
 
 
 @media screen and (min-width: 680px) {
-    .table {
+    .game__table {
         width: 518px;
         height: 360px;
     }
@@ -278,7 +285,7 @@ h1{
         margin: 7vw auto;
     }
 
-    .modal_final{
+    .modal__result__content{
         height: 49vh;
         width: 31vw;
     }

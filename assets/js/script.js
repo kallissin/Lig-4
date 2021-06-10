@@ -10,30 +10,30 @@ start__button.addEventListener('click', function () {
 }) // BOTÃO DE INICIAR O JOGO
 
 function getName() {
-    let input = document.getElementById('name')
-    let input_2 = document.getElementById('name_2')
-    let name = input.value
-    let name_2 = input_2.value
-    if (name.length > 8) {
-        name = name.substring(0, 8) + "..."
-        name_2 = name_2.substring(0, 8) + "..."
+    let input = document.getElementById('name1')
+    let input_2 = document.getElementById('name2')
+    let name1 = input.value
+    let name2 = input_2.value
+    if ((name1.length > 8)||(name2.length > 8)) {
+        name1 = name1.substring(0, 8) + "..."
+        name2 = name2.substring(0, 8) + "..."
     }
-    let player = document.getElementById('jogador')
-    let player_2 = document.getElementById('jogador_2')
-    let nameText = document.createElement('h1')
-    let nameText_2 = document.createElement('h1')
-    nameText.innerText = name
-    nameText_2.innerText = name_2
-    player.appendChild(nameText)
-    player_2.appendChild(nameText_2)
+    let player1 = document.getElementById('player1')
+    let player2 = document.getElementById('player2')
+    let nameText1 = document.createElement('h1')
+    let nameText2 = document.createElement('h1')
+    nameText1.innerText = name1
+    nameText2.innerText = name2
+    player1.appendChild(nameText1)
+    player2.appendChild(nameText2)
 
-    nomePlayer1Winner = name;
-    nomePlayer2Winner = name_2;
+    nomePlayer1Winner = name1;
+    nomePlayer2Winner = name2;
 } // FUNÇÃO DE COLETAR NOME NA TELA INICIAL
 
 
 function gameStart() {
-    let mainscreen = document.getElementById('table')
+    let mainscreen = document.getElementById('game__table')
 
     for (let i = 0; i < 7; i++) {
         let coluna = document.createElement('div')
@@ -53,7 +53,7 @@ function gameStart() {
 
 gameStart()
 let lastplay = 0
-let colunas = document.querySelectorAll("div.table__column")
+let colunas = document.querySelectorAll(".table__column")
 let escolha = true
 for (let i = 0; i < colunas.length; i++) {
     colunas[i].addEventListener("click", () => {
@@ -68,7 +68,6 @@ for (let i = 0; i < colunas.length; i++) {
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay)) {
-                        // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 1) ENTRA AQUI
                         winner = nomePlayer1Winner;
                         return mostraModal(winner)
                     }
@@ -80,7 +79,6 @@ for (let i = 0; i < colunas.length; i++) {
                     cell.appendChild(disco)
                     lastplay = cell
                     if (winCheck(lastplay)) {
-                        // CÓDIGO PRA ATIVAR O MODAL DA TELA DE VENCEDOR (PLAYER 2) ENTRA AQUI
                         winner = nomePlayer2Winner;
                         return mostraModal(winner)
                     }
@@ -208,40 +206,7 @@ function winCheckDiag(cell) {
 
     return false
 } // FUNÇÃO QUE CHECA DIAGONAIS
-function winCheck(coord) {
-    if (winCheckUp(coord)) {
-        return true
-    } else if (winCheckSides(coord)) {
-        return true
-    } else if (winCheckDiag(coord)) {
-        return true    
-    } else{
-        empate();
-        return false
-    }
-
-} // FUNÇÃO QUE ENVELOPA TODAS
-
-
-const mostraModal = (value) => {
-    const modalFinal = document.querySelector('.modal_container');
-    const botaoReset = document.getElementById('botao_reset');
-    
-    const msgDeVitoria = document.querySelector('#h2_resultado')
-    msgDeVitoria.innerHTML = '';
-    if (value === 'Empate!') {
-        msgDeVitoria.innerText = `${value}`;
-    } else {
-        msgDeVitoria.innerText = `O jogador ${value} vence o jogo!`
-    }
-    modalFinal.classList.add('ativo');
-    botaoReset.addEventListener('click', function () {
-        location.reload();
-    })
-    // Aplicando evento no botão reset
-}
-
-const empate = () => {
+function draw() {
     let totalCelulas = 0;
     for(let i = 0; i < 7; i++) {
         for(let j = 0; j < 6; j++) {
@@ -252,4 +217,42 @@ const empate = () => {
             }
         }
     }
+} // FUNÇÃO QUE CHECA EMPATE
+function winCheck(coord) {
+    if (winCheckUp(coord)) {
+        return true
+    } else if (winCheckSides(coord)) {
+        return true
+    } else if (winCheckDiag(coord)) {
+        return true    
+    } else{
+        draw();
+        return false
+    }
+
+} // FUNÇÃO QUE ENVELOPA TODAS
+
+
+const mostraModal = (value) => {
+    
+    const modalFinal = document.querySelector('.modal__result');
+    const btnReset = document.getElementById('btn-reset');
+    const msgDeVitoria = document.getElementById('modal__result__title')
+    msgDeVitoria.innerHTML = '';
+    
+    if (value === 'Empate!') {
+        msgDeVitoria.innerText = `${value}`;
+    } else {
+        msgDeVitoria.innerText = `O jogador ${value} vence o jogo!`
+    }
+
+    setTimeout(() => {
+        modalFinal.classList.remove('hidden');
+    },1000)
+
+    btnReset.addEventListener('click', function () {
+        location.reload();
+    })
+    // Aplicando evento no botão reset
 }
+
