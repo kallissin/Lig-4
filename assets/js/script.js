@@ -57,6 +57,7 @@ gameStart()
 let lastplay = 0
 let colunas = document.querySelectorAll(".table__column")
 let escolha = true
+let audioEfect = new Audio('../assets/audio/efeito.mp3') 
 for (let i = 0; i < colunas.length; i++) {
     colunas[i].addEventListener("click", () => {
         const disco = document.createElement("div")
@@ -65,9 +66,10 @@ for (let i = 0; i < colunas.length; i++) {
             let cell = colunas[i].children[j]
             if (cell.childElementCount === 0) {
                 if (escolha === true) {
-                    disco.classList = "red"
+                    disco.classList.add('red')
                     disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
+                    audioEfect.play();
                     lastplay = cell
                     if (winCheck(lastplay)) {
                         winner = nomePlayer1Winner;
@@ -76,9 +78,11 @@ for (let i = 0; i < colunas.length; i++) {
                     return escolha = false
                     
                 } else {
-                    disco.classList = "black"
+                    disco.classList.add('black')
                     disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
+                    audioEfect.play();
+
                     lastplay = cell
                     if (winCheck(lastplay)) {
                         winner = nomePlayer2Winner;
