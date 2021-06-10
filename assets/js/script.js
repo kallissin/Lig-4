@@ -159,7 +159,7 @@ function winCheckSides(cell) {
         }
     }
 
-    if (countR === 3 || countL === 3) { 
+    if (countR === 3 || countL === 3 || countR + countL === 3) { 
         return true
     }
 
@@ -216,7 +216,9 @@ function winCheckDiag(cell) {
         }
     }
 
-    if (countR === 3 || countL === 3 || countRUp === 3 || countLUp === 3) { 
+    let countTotal = countR + countL + countLUp + countRUp
+
+    if (countR === 3 || countL === 3 || countRUp === 3 || countLUp === 3 || countTotal === 3) { 
         return true
     }
 
