@@ -118,7 +118,6 @@ body {
 
 .player-screen {
     display: flex;
-    /*position: relative;*/
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
@@ -138,14 +137,10 @@ body {
 }
 
 .player1 {
-    /*position: absolute;*/
-    /*left: 5%;*/
     background-color: hsl(0, 50%, 50%);
 }
 
 .player2 {
-    /*position: absolute;*/
-    /*right: 5%;*/
     background-color: hsl(240, 9%, 21%); 
 }
 
@@ -244,7 +239,7 @@ h1{
 
     .player-screen {
         height: 7rem;
-        width: 30rem;
+        width: 29rem;
     }
     .player--style{
         width: 8.5rem;

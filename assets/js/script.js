@@ -57,7 +57,8 @@ gameStart()
 let lastplay = 0
 let colunas = document.querySelectorAll(".table__column")
 let escolha = true
-let audioEfect = new Audio('../assets/audio/efeito.mp3') 
+//let audioEfect = new Audio('assets/audio/efeito.mp3') 
+let audioEfect = document.getElementById('som-efect')
 for (let i = 0; i < colunas.length; i++) {
     colunas[i].addEventListener("click", () => {
         const disco = document.createElement("div")
