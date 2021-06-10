@@ -14,8 +14,10 @@ function getName() {
     let input_2 = document.getElementById('name2')
     let name1 = input.value
     let name2 = input_2.value
-    if ((name1.length > 8)||(name2.length > 8)) {
+    if (name1.length > 8) {
         name1 = name1.substring(0, 8) + "..."
+    }
+    if (name2.length > 8) {
         name2 = name2.substring(0, 8) + "..."
     }
     let player1 = document.getElementById('player1')
