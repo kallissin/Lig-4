@@ -256,3 +256,4 @@ const mostraModal = (value) => {
     // Aplicando evento no botão reset
 }
 
+
