@@ -15,17 +15,22 @@ function getName() {
     let name1 = '';
     let name2 = '';
 
-    if ((input.value === '') || (input.value === ' ')) {
+    let re = new RegExp('[A-Za-z0-9]')
+    let verifyInput1 = re.test(input.value);
+    let verifyInput2 = re.test(input2.value);
+
+    if ((verifyInput1 === false)) {
         name1 = 'Jogador 1' ;  
     } else {
         name1 = input.value;
     }
 
-    if ((input2.value === '') || (input2.value === ' ')) {
+    if ((verifyInput2 === false)) {
         name2 = 'Jogador 2';
     } else {
         name2 = input2.value;
     }
+
 
     if (name1.length > 9) {
         name1 = name1.substring(0, 9) + "..."
