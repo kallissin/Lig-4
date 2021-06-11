@@ -1,29 +1,45 @@
 let start__button = document.getElementById('start')
-let nomePlayer1Winner;
-let nomePlayer2Winner;
-let winner;
+let nomePlayer1Winner = '';
+let nomePlayer2Winner = '';
+let winner = '';
 
 start__button.addEventListener('click', function () {
-    let modal = document.getElementsByClassName('start__screen')
+    let modal = document.getElementsByClassName('start-screen')
     getName()
     modal[0].style.display = "none"
 }) // BOTÃO DE INICIAR O JOGO
 
 function getName() {
     let input = document.getElementById('name1')
-    let input_2 = document.getElementById('name2')
-    let name1 = input.value
-    let name2 = input_2.value
-    if (name1.length > 8) {
-        name1 = name1.substring(0, 8) + "..."
+    let input2 = document.getElementById('name2')
+    let name1 = '';
+    let name2 = '';
+
+    if ((input.value === '') || (input.value === ' ')) {
+        name1 = 'Jogador 1' ;  
+    } else {
+        name1 = input.value;
     }
-    if (name2.length > 8) {
-        name2 = name2.substring(0, 8) + "..."
+
+    if ((input2.value === '') || (input2.value === ' ')) {
+        name2 = 'Jogador 2';
+    } else {
+        name2 = input2.value;
+    }
+
+    if (name1.length > 9) {
+        name1 = name1.substring(0, 9) + "..."
+    }
+
+    if (name2.length > 9) {
+        name2 = name2.substring(0, 9) + "..."
     }
     let player1 = document.getElementById('player1')
     let player2 = document.getElementById('player2')
     let nameText1 = document.createElement('h1')
     let nameText2 = document.createElement('h1')
+    nameText1.classList.add('player__title');
+    nameText2.classList.add('player__title');
     nameText1.innerText = name1
     nameText2.innerText = name2
     player1.appendChild(nameText1)
@@ -57,7 +73,7 @@ gameStart()
 let lastplay = 0
 let colunas = document.querySelectorAll(".table__column")
 let escolha = true
-//let audioEfect = new Audio('assets/audio/efeito.mp3') 
+
 let audioEfect = document.getElementById('som-efect')
 for (let i = 0; i < colunas.length; i++) {
     colunas[i].addEventListener("click", () => {
@@ -253,10 +269,9 @@ function winCheck(coord) {
 
 } // FUNÇÃO QUE ENVELOPA TODAS
 
-
-const mostraModal = (value) => {
+function mostraModal(value) {
     
-    const modalFinal = document.querySelector('.modal-result');
+    const modalFinale = document.querySelector('.modal-result');
     const btnReset = document.getElementById('btn-home');
     const msgDeVitoria = document.getElementById('modal-result__title');
     const btnReplace = document.getElementById('btn-replace');
@@ -265,11 +280,11 @@ const mostraModal = (value) => {
     if (value === 'Empate!') {
         msgDeVitoria.innerText = `${value}`;
     } else {
-        msgDeVitoria.innerText = `O jogador ${value} vence o jogo!`
+        msgDeVitoria.innerText = `O ${value} vence o jogo!`
     }
 
     setTimeout(() => {
-        modalFinal.classList.remove('hidden');
+        modalFinale.classList.remove('hidden');
     },1000)
 
     btnReset.addEventListener('click', function () {
@@ -278,9 +293,7 @@ const mostraModal = (value) => {
 
     btnReplace.addEventListener('click', function () {
         clearCode();
-        modalFinal.classList.add('hidden');
+        modalFinale.classList.add('hidden');
     })
-    // Aplicando evento no botão reset
+
 }
-
-
