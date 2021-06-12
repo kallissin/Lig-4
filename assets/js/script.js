@@ -3,6 +3,17 @@ let nomePlayer1Winner = '';
 let nomePlayer2Winner = '';
 let winner = '';
 
+let table = [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+
+]
+
 start__button.addEventListener('click', function () {
     let modal = document.getElementsByClassName('start-screen')
     getName()
@@ -92,8 +103,10 @@ for (let i = 0; i < colunas.length; i++) {
                     disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
                     audioEfect.play();
-                    lastplay = cell
-                    if (winCheck(lastplay)) {
+                    addArray(cell, 1);
+                    let value = winCheckup();
+
+                    if (value === true) {
                         winner = nomePlayer1Winner;
                         return mostraModal(winner)
                     }
@@ -104,9 +117,10 @@ for (let i = 0; i < colunas.length; i++) {
                     disco.classList.add("fallen__disc")
                     cell.appendChild(disco)
                     audioEfect.play();
-
-                    lastplay = cell
-                    if (winCheck(lastplay)) {
+                    addArray(cell, 2);
+                    let value = winCheckup();
+              ;
+                    if (value === true) {
                         winner = nomePlayer2Winner;
                         return mostraModal(winner)
                     }
@@ -119,6 +133,17 @@ for (let i = 0; i < colunas.length; i++) {
     })
 }
 
+
+function addArray(cell, valueDisc) {
+
+    let column = Number(cell.id.charAt(0));
+    let index = Number(cell.id.charAt(2));
+
+    table[column][index] = valueDisc;
+    console.log(table);
+
+}
+
 function clearCode() {
     const cell = document.querySelectorAll('div.table__cell');
 
@@ -128,149 +153,204 @@ function clearCode() {
     
 }
 
-function winCheckUp(cell) {
-    let id = cell.id
-    let column = Number(id.charAt(0))
-    let place = Number(id.charAt(2))
+function winCheckup() {
+    // checa a vertical
+    let arrY = table[0].length - 3;
+    let arrX = table.length - 3;
+    for (let i = 0; i < table.length; i++) {
+        let column = table[i];
 
-    let colour = cell.lastChild.classList[0]
+        for (let j = 0; j < arrY; j++) {
+            let cell = column[j];
 
-    let count = 0
+            if (cell != 0){
 
-    for (let i = 1; i < 4; i++) { // CHECK VERTICAL
-        let next = document.getElementById(`${column}.${place - i}`)
-        if (next === null) {
-            return false
-        } else if (next.lastChild.classList[0] === colour) {
-            count += 1
-        }
-    }
-
-    if (count === 3) {
-        return true
-    }
-    return false
-} // FUNÇÃO QUE CHECA EM CIMA
-function winCheckSides(cell) {
-    let id = cell.id
-    let column = Number(id.charAt(0))
-    let place = Number(id.charAt(2))
-
-    let colour = cell.lastChild.classList[0]
-    let countR = 0
-    let countL = 0
-
-    for (let i = 1; i < 4; i++) {
-        let next = document.getElementById(`${column + i}.${place}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countR += 1
-        }
-    }
-
-    for (let i = 1; i < 4; i++) {
-        let next = document.getElementById(`${column - i}.${place}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countL += 1
-        }
-    }
-
-    if (countR === 3 || countL === 3 || countR + countL === 3) { 
-        return true
-    }
-
-    return false
-} // FUNÇÃO QUE CHECA LADOS
-function winCheckDiag(cell) {
-    let id = cell.id
-    let column = Number(id.charAt(0))
-    let place = Number(id.charAt(2))
-
-    let colour = cell.lastChild.classList[0]
-    let countR = 0
-    let countRUp = 0
-    let countL = 0
-    let countLUp = 0
-
-    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO ESQUERDA
-        let next = document.getElementById(`${column - i}.${place - i}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countL += 1
-        }
-    }
-
-    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA DIREITA
-        let next = document.getElementById(`${column + i}.${place + i}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countRUp += 1
-        }
-    }
-
-    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA ESQUERDA
-        let next = document.getElementById(`${column - i}.${place + i}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countLUp += 1
-        }
-    }
-
-    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO DIREITA
-        let next = document.getElementById(`${column + i}.${place - i}`)
-
-        if (next === null || next.lastChild === null) {
-            break
-        } else if (next.lastChild.classList[0] === colour) {
-            countR += 1
-        }
-    }
-
-    let countTotal = countR + countL + countLUp + countRUp
-
-    if (countR === 3 || countL === 3 || countRUp === 3 || countLUp === 3 || countTotal === 3) { 
-        return true
-    }
-
-    return false
-} // FUNÇÃO QUE CHECA DIAGONAIS
-function draw() {
-    let totalCelulas = 0;
-    let quantColumn = 7;
-    let quantCell = 6
-    let calCell = quantColumn * quantCell
-    for(let i = 0; i < quantColumn; i++) {
-        for(let j = 0; j < quantCell; j++) {
-            totalCelulas += colunas[i].childNodes[j].childElementCount;
-            if(totalCelulas === calCell){ 
-                let msgEmpate = 'Empate!'
-                mostraModal(msgEmpate)
+                if ((cell === column[j + 1]) && (cell === column[j + 2]) && (cell === column[j + 3])){
+                    return true;
+                }
             }
         }
     }
-} // FUNÇÃO QUE CHECA EMPATE
-function winCheck(coord) {
-    if (winCheckUp(coord)) {
-        return true
-    } else if (winCheckSides(coord)) {
-        return true
-    } else if (winCheckDiag(coord)) {
-        return true    
-    } else{
-        draw();
-        return false
+
+    // checa a horizontal
+    for (let i = 0; i < arrX; i++) {
+        let column = table[i];
+
+        for (let j = 0; j < table[0].length; j ++) {
+            let cell = column[j]
+
+            if (cell != 0) {
+
+                if ((cell === table[i + 1][j]) && (cell === table[i + 2][j]) && (cell === table[i + 3][j])) {
+                    return true;
+                }
+            }
+        }
     }
+
+    // checa a diagonal (direita)
+    for (let i = 0; i < arrX; i++) {
+        
+        for (let j = 0; j < arrY; j++) {
+            let cell = table[i][j];
+        
+            if (cell != 0) {
+                
+                if ((cell === table[i + 1][j + 1]) && (cell === table[i + 2][j + 2]) && (cell === table[i + 3][j + 3])) {
+                    return true;
+                }
+            }
+        }
+
+    }
+
+    // checa a diagonal (esquerda)
+    for (let i = 3; i < table.length; i++) {
+    
+        for (let j = 0; j < arrY; j++) {
+            let cell = table[i][j];
+        
+            if (cell != 0) {
+                
+                if ((cell === table[i - 1][j + 1]) && (cell === table[i - 2][j + 2]) && (cell === table[i - 3][j + 3])) {
+                    return true;
+                }
+            }
+        }
+
+    }
+
+    return false
+} // FUNÇÃO QUE CHECA EM CIMA
+//function winCheckSides(cell) {
+//    let id = cell.id
+//    let column = Number(id.charAt(0))
+//    let place = Number(id.charAt(2))
+
+//    let colour = cell.lastChild.classList[0]
+//    let countR = 0
+//    let countL = 0
+
+//    for (let i = 1; i < 4; i++) {
+//        let next = document.getElementById(`${column + i}.${place}`)
+
+//        if (next === null || next.lastChild === null) {
+//            break
+//        } else if (next.lastChild.classList[0] === colour) {
+//            countR += 1
+//        }
+//    }
+
+//    for (let i = 1; i < 4; i++) {
+//        let next = document.getElementById(`${column - i}.${place}`)
+
+//        if (next === null || next.lastChild === null) {
+//            break
+//        } else if (next.lastChild.classList[0] === colour) {
+//            countL += 1
+//        }
+//    }
+
+//    if (countR === 3 || countL === 3 || countR + countL === 3) { 
+//        return true
+//    }
+
+//    return false
+//} // FUNÇÃO QUE CHECA LADOS
+
+
+
+//function winCheckDiag(cell) {
+//    let id = cell.id
+//    let column = Number(id.charAt(0))
+//    let place = Number(id.charAt(2))
+
+//    let colour = cell.lastChild.classList[0]
+//    let countR = 0
+//    let countRUp = 0
+//    let countL = 0
+//    let countLUp = 0
+
+//    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO ESQUERDA
+//        let next = document.getElementById(`${column - i}.${place - i}`)
+
+//        if (next === null || next.lastChild === null) {
+//            break
+//        } else if (next.lastChild.classList[0] === colour) {
+//            countL += 1
+//        }
+//    }
+
+//    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA DIREITA
+//        let next = document.getElementById(`${column + i}.${place + i}`)
+
+//        if (next === null || next.lastChild === null) {
+//            break
+//        } else if (next.lastChild.classList[0] === colour) {
+//            countRUp += 1
+//        }
+//    }
+
+//    for (let i = 1; i < 4; i++) { // BAIXO PRA CIMA ESQUERDA
+//        let next = document.getElementById(`${column - i}.${place + i}`)
+
+//        if (next === null || next.lastChild === null) {
+//            break
+//        } else if (next.lastChild.classList[0] === colour) {
+//            countLUp += 1
+//        }
+//    }
+
+//    for (let i = 1; i < 4; i++) { // CIMA PRA BAIXO DIREITA
+//        let next = document.getElementById(`${column + i}.${place - i}`)
+
+//        if (next === null || next.lastChild === null) {
+//            break
+//        } else if (next.lastChild.classList[0] === colour) {
+//            countR += 1
+//        }
+//    }
+
+//    let countTotal = countR + countL + countLUp + countRUp
+
+//    if (countR === 3 || countL === 3 || countRUp === 3 || countLUp === 3 || countTotal === 3) { 
+//        return true
+//    }
+
+//    return false
+//} // FUNÇÃO QUE CHECA DIAGONAIS
+
+
+//function draw() {
+//    let totalCelulas = 0;
+//    let quantColumn = 7;
+//    let quantCell = 6
+//    let calCell = quantColumn * quantCell
+//    for(let i = 0; i < quantColumn; i++) {
+//        for(let j = 0; j < quantCell; j++) {
+//            totalCelulas += colunas[i].childNodes[j].childElementCount;
+//            if(totalCelulas === calCell){ 
+//                let msgEmpate = 'Empate!'
+//                mostraModal(msgEmpate)
+//            }
+//        }
+//    }
+//} // FUNÇÃO QUE CHECA EMPATE
+
+
+function winCheck() {
+    console.log('winCheck')
+    if (winCheckUp() === true) {
+        return true
+    }
+    //} else if (winCheckSides(table)) {
+    //    return true
+    //} else if (winCheckDiag(table)) {
+    //    return true    
+    //} else{
+    //    draw();
+    //    return false
+    //}
 
 } // FUNÇÃO QUE ENVELOPA TODAS
 
