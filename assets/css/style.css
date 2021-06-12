@@ -217,8 +217,10 @@ body {
     background-color: hsl(0, 50%, 50%);
 }
 
-.player__title {
+.player__name {
     line-height: 75px;
+    font-size: 21px;
+    font-weight: bold;
 }
 
 .player2 {
